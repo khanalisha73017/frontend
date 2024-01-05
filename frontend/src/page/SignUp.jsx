@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {
-  POST_CREATEUSER_ERROR,
-  POST_CREATEUSER_LOADING,
-  POST_CREATEUSER_SUCCESS,
-} from "../redux/authuser/actionType";
+
 import { useDispatch } from "react-redux";
+import { createUser } from "../redux/authuser/action";
 
 export const SignUp = () => {
   const [formData, setFormData] = useState({
-    name: "",
     avatar: "",
+    name: "",
+
     email: "",
     password: "",
   });
@@ -38,44 +36,13 @@ export const SignUp = () => {
     e.preventDefault();
     // console.log(formData, profileImage);
     const formDataToSubmit = new FormData();
-    formDataToSubmit.append("username", formData.username);
+    formDataToSubmit.append("name", formData.username);
     formDataToSubmit.append("email", formData.email);
     formDataToSubmit.append("password", formData.password);
 
     formDataToSubmit.append("avatar", avatar);
-    if (avatar !== null) {
-      formDataToSubmit.append("avatar", avatar);
-    }
 
-    createUser(formDataToSubmit, navigate);
-  };
-
-  const createUser = async (user) => {
-    dispatch({ type: POST_CREATEUSER_LOADING });
-    // console.log(user);
-    // console.log(user);
-    try {
-      const response = await axios.post(
-        ` ${process.env.REACT_APP_API_URL}/api/register`,
-        user,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      navigate("/login");
-      dispatch({
-        type: POST_CREATEUSER_SUCCESS,
-      });
-
-      alert("Account created successfully");
-    } catch (error) {
-      console.log(error);
-      dispatch({ type: POST_CREATEUSER_ERROR });
-    
-      alert("Opss Something wrong...");
-    }
+    dispatch(createUser(formDataToSubmit, navigate));
   };
 
   return (
