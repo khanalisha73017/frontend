@@ -7,13 +7,11 @@ import { createUser } from "../redux/authuser/action";
 
 export const SignUp = () => {
   const [formData, setFormData] = useState({
-  
     name: "",
-
     email: "",
     password: "",
   });
-  const [avatar, setavatar] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -22,7 +20,7 @@ export const SignUp = () => {
     if (type === "file") {
       const fileInput = e.target;
       if (fileInput.files) {
-        setavatar(fileInput.files[0]);
+        setAvatar(fileInput.files[0]);
       }
     } else {
       setFormData({
@@ -54,7 +52,7 @@ export const SignUp = () => {
               Create and account
             </h1>
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-{/*               <div>
+              <div>
                 <label
                   htmlFor="avatar"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -69,7 +67,7 @@ export const SignUp = () => {
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary_green focus:border-primary_green block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
-              </div> */}
+              </div>
               <div>
                 <label
                   htmlFor="username"
@@ -165,3 +163,4 @@ export const SignUp = () => {
     </section>
   );
 };
+
