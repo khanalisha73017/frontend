@@ -56,6 +56,8 @@ export const Login = () => {
     } catch (error) {
       console.log(error);
       dispatch({ type: POST_LOGIN_ERROR });
+      alert("Please Register yourSelf first ");
+
      
     }
   };
